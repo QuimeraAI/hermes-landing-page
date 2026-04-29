@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Prime - Tarot, Astrología y Esoterismo | Chatbot de Voz</title>
+    <meta name="description" content="Chatbot de Tarot, Astrología y Esoterismo vía WhatsApp. Envía notas de voz y recibe respuestas personalizadas: cartas astrales, numerología, tiradas de cartas y más.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #9b59b6;
+            --secondary: #8e44ad;
+            --accent: #f39c12;
+            --dark: #1a1a2e;
+            --darker: #0f0f1a;
+            --light: #f5f5f5;
+            --whatsapp: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: var(--darker);
+            color: var(--light);
+            line-height: 1.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(155, 89, 182, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #c9a8e6;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: #b8b8d1;
+        }
+
+        /* WhatsApp CTA Button */
+        .whatsapp-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--whatsapp);
+            color: white;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .whatsapp-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .phone-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-top: 1rem;
+            display: block;
+        }
+
+        .voice-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(243, 156, 18, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        .voice-icon {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: var(--dark);
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(155, 89, 182, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .service-card p {
+            color: #b8b8d1;
+            font-size: 1.1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: var(--darker);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(142, 68, 173, 0.1) 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #d0c8e8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .author-info h4 {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        .author-info span {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 6rem 2rem;
+            background: var(--dark);
+        }
+
+        .steps {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .step-content p {
+            color: #b8b8d1;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(155, 89, 182, 0.3);
+        }
+
+        .footer-cta {
+            margin-bottom: 3rem;
+        }
+
+        .footer-cta h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .footer-cta p {
+            font-size: 1.2rem;
+            color: #b8b8d1;
+            margin-bottom: 2rem;
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .whatsapp-cta {
+                padding: 1.2rem 2rem;
+                font-size: 1.2rem;
+            }
+
+            .phone-number {
+                font-size: 1.4rem;
+            }
+
+            .step {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hermes Prime</h1>
+            <p class="hero-tagline">Tu guía en el misticismo</p>
+            <p class="hero-description">
+                Un chatbot inteligente especializado en Tarot, Astrología y Esoterismo. 
+                Habla conmigo directamente por WhatsApp con notas de voz y recibe respuestas personalizadas en audio.
+            </p>
+
+            <a href="https://wa.me/34623043635" class="whatsapp-cta">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Habla con Hermes Prime
+            </a>
+
+            <span class="phone-number">+34 623 043 635</span>
+
+            <div class="voice-indicator">
+                <svg class="voice-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+                Respuestas en audio | Experiencia completa de voz
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <h2 class="section-title">Mis Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎴</div>
+                <h3>Tiradas de Tarot</h3>
+                <p>Consultas personalizadas con el mazo completo. Carta del día, amor, trabajo, destino y más. Recibe interpretaciones profundas en audio.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⭐</div>
+                <h3>Carta Astral</h3>
+                <p>Análisis completo de tu mapa astral: signo solar, lunar, ascendente y aspectos planetarios. Conoce tu potencial y desafíos.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔢</div>
+                <h3>Numerología</h3>
+                <p>Descubre el significado de tus números: número de vida, camino de vida, expresiones y compatibilidad numerológica.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔮</div>
+                <h3>Esoterismo</h3>
+                <p>Conversaciones sobre esoterismo, autoconocimiento y desarrollo personal desde perspectivas místicas y espirituales.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3>Experiencias Especiales</h3>
+                <p>Rituales simbólicos, ceremonias personales, meditaciones guiadas y rituales de manifestación adaptados a tu intención.</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💫</div>
+                <h3>Consultas Libres</h3>
+                <p>Pregunta lo que quieras. Desde orientación amorosa hasta consejos de vida, Hermes está aquí para guiarte con sabiduría.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2 class="section-title">Cómo Funciona</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Envíame un mensaje de voz</h3>
+                    <p>Guarda mi número (+34 623 043 635) y envíame una nota de voz por WhatsApp con tu consulta. Cuanto más específico seas, mejor podré ayudarte.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Espera mi respuesta en audio</h3>
+                    <p>En unos minutos recibirás una respuesta de voz personalizada. Mis respuestas suelen durar entre 1-2 minutos para darte la atención que mereces.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Guarda mis consejos</h3>
+                    <p>Tengo memoria de nuestras conversaciones. Puedo recordar tus objetivos, preocupaciones y detalles importantes para ofrecerte orientación continua.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title">Lo Que Dicen Mis Clientes</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Increíble experiencia. La carta astral que me hizo Hermes fue sorprendentemente precisa. Me encantó que respondiera con voz, se siente muy personal y auténtico."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">LM</div>
+                    <div class="author-info">
+                        <h4>Laura M.</h4>
+                        <span>Consulta de carta astral</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Las tiradas de tarot son profundas y reveladoras. Hermes realmente parece entender lo que necesitas escuchar. La numerología también fue muy acertada."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">CR</div>
+                    <div class="author-info">
+                        <h4>Carlos R.</h4>
+                        <span>Tirada de Tarot Amoroso</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Me fascina la facilidad de uso. Solo mando un audio y recibo una respuesta detallada. Las conversaciones sobre esoterismo han sido muy reveladoras para mí."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SP</div>
+                    <div class="author-info">
+                        <h4>Sofía P.</h4>
+                        <span>Consultas filosóficas</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <p class="testimonial-text">"La memoria del bot es impresionante. Recuerda detalles de conversaciones anteriores y los integra en respuestas nuevas. Se siente como hablar con un verdadero astrólogo."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">DJ</div>
+                    <div class="author-info">
+                        <h4>David J.</h4>
+                        <span>Cliente frecuente</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <footer class="footer">
+        <div class="footer-cta">
+            <h2>¿Listo para conocer tu destino?</h2>
+            <p>Empieza ahora mismo. Envíame un audio con tu primera consulta.</p>
+
+            <a href="https://wa.me/34623043635" class="whatsapp-cta">
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Habla con Hermes Prime
+            </a>
+
+            <span class="phone-number">+34 623 043 635</span>
+
+            <div class="voice-indicator">
+                <svg class="voice-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                    <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                </svg>
+                Respondo en audio con voz personalizada
+            </div>
+        </div>
+
+        <p class="copyright">© 2026 Hermes Prime. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
