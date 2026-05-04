@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔮 Estadísticas Hermes Tarot</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e4d5f7;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: rgba(155, 89, 182, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(155, 89, 182, 0.3);
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #f39c12;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #dcdcdc;
+            opacity: 0.9;
+        }
+
+        .last-updated {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #9b59b6;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .kpi-card {
+            background: rgba(155, 89, 182, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(155, 89, 182, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .kpi-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 5px;
+        }
+
+        .kpi-label {
+            font-size: 1rem;
+            color: #dcdcdc;
+            opacity: 0.9;
+        }
+
+        /* Charts Section */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: rgba(155, 89, 182, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(155, 89, 182, 0.3);
+        }
+
+        .chart-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #f39c12;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Stats Table */
+        .stats-table-container {
+            background: rgba(155, 89, 182, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(155, 89, 182, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .stats-table th {
+            background: rgba(155, 89, 182, 0.3);
+            color: #f39c12;
+            padding: 15px;
+            text-align: left;
+            font-family: 'Cinzel', serif;
+        }
+
+        .stats-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(155, 89, 182, 0.2);
+        }
+
+        .stats-table tr:hover {
+            background: rgba(155, 89, 182, 0.1);
+        }
+
+        /* Refresh Button */
+        .refresh-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto 30px;
+        }
+
+        .refresh-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(155, 89, 182, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-value {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Loading Spinner */
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #f39c12;
+        }
+
+        /* Topic Tags */
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .topic-tag {
+            background: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(243, 156, 18, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🔮 Estadísticas Hermes Tarot</h1>
+            <p class="subtitle">Panel de control de interacciones con usuarios</p>
+            <p class="last-updated" id="lastUpdated">Cargando datos...</p>
+        </header>
+
+        <!-- Refresh Button -->
+        <button class="refresh-btn" onclick="loadStats()">🔄 Actualizar Estadísticas</button>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid" id="kpiGrid">
+            <div class="loading">Cargando estadísticas...</div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+            <!-- Interactions Over Time (Daily) -->
+            <div class="chart-container">
+                <h2 class="chart-title">📈 Interacciones por Día</h2>
+                <canvas id="dailyChart"></canvas>
+            </div>
+
+            <!-- Topic Distribution -->
+            <div class="chart-container">
+                <h2 class="chart-title">🎯 Distribución de Temas</h2>
+                <canvas id="topicChart"></canvas>
+            </div>
+
+            <!-- Monthly Trend -->
+            <div class="chart-container">
+                <h2 class="chart-title">📅 Interacciones por Mes</h2>
+                <canvas id="monthlyChart"></canvas>
+            </div>
+
+            <!-- Input vs Output Length -->
+            <div class="chart-container">
+                <h2 class="chart-title">📊 Longitud Promedio: Entrada vs Salida</h2>
+                <canvas id="lengthChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Chats Table -->
+        <div class="stats-table-container">
+            <h2 class="chart-title">👥 Resumen por Cliente</h2>
+            <table class="stats-table" id="chatsTable">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Interacciones</th>
+                        <th>Palabras Entrada</th>
+                        <th>Palabras Salida</th>
+                        <th>Temas Principales</th>
+                    </tr>
+                </thead>
+                <tbody id="chatsTableBody">
+                    <tr>
+                        <td colspan="5" style="text-align: center;">Cargando...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let statsData = null;
+        let charts = {};
+
+        // Load stats data
+        async function loadStats() {
+            try {
+                const response = await fetch('stats_data.json?t=' + Date.now());
+                statsData = await response.json();
+                
+                updateKPIs();
+                renderCharts();
+                renderChatsTable();
+                
+                document.getElementById('lastUpdated').textContent = 
+                    `📅 Última actualización: ${new Date(statsData.generated_at).toLocaleString('es-ES')}`;
+            } catch (error) {
+                console.error('Error cargando estadísticas:', error);
+                document.getElementById('kpiGrid').innerHTML = 
+                    '<div class="loading">❌ Error cargando datos. Ejecuta generate_stats.py primero.</div>';
+            }
+        }
+
+        // Update KPI cards
+        function updateKPIs() {
+            const kpiGrid = document.getElementById('kpiGrid');
+            
+            kpiGrid.innerHTML = `
+                <div class="kpi-card">
+                    <div class="kpi-value">${statsData.total_chats}</div>
+                    <div class="kpi-label">👥 Clientes Totales</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">${statsData.total_interactions}</div>
+                    <div class="kpi-label">💬 Interacciones</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">${statsData.avg_input_length}</div>
+                    <div class="kpi-label">📝 Palabras Promedio (Entrada)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">${statsData.avg_output_length}</div>
+                    <div class="kpi-label">📤 Palabras Promedio (Salida)</div>
+                </div>
+            `;
+        }
+
+        // Render all charts
+        function renderCharts() {
+            // Destroy existing charts
+            Object.values(charts).forEach(chart => chart.destroy());
+            
+            renderDailyChart();
+            renderTopicChart();
+            renderMonthlyChart();
+            renderLengthChart();
+        }
+
+        // Daily Interactions Chart
+        function renderDailyChart() {
+            const days = Object.keys(statsData.interactions_by_day);
+            const values = Object.values(statsData.interactions_by_day);
+            
+            charts.daily = new Chart(document.getElementById('dailyChart'), {
+                type: 'line',
+                data: {
+                    labels: days,
+                    datasets: [{
+                        label: 'Interacciones',
+                        data: values,
+                        borderColor: '#f39c12',
+                        backgroundColor: 'rgba(243, 156, 18, 0.2)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#dcdcdc' },
+                            grid: { color: 'rgba(155, 89, 182, 0.2)' }
+                        },
+                        x: {
+                            ticks: { color: '#dcdcdc' },
+                            grid: { color: 'rgba(155, 89, 182, 0.2)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Topic Distribution Chart
+        function renderTopicChart() {
+            const topics = Object.keys(statsData.topic_distribution);
+            const values = Object.values(statsData.topic_distribution);
+            
+            charts.topic = new Chart(document.getElementById('topicChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: topics.map(t => t.charAt(0).toUpperCase() + t.slice(1)),
+                    datasets: [{
+                        data: values,
+                        backgroundColor: [
+                            '#9b59b6', '#8e44ad', '#f39c12', '#e74c3c',
+                            '#3498db', '#2ecc71', '#f1c40f', '#e67e22'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#1a0a2e'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#dcdcdc', padding: 15 }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Monthly Chart
+        function renderMonthlyChart() {
+            const months = Object.keys(statsData.interactions_by_month);
+            const values = Object.values(statsData.interactions_by_month);
+            
+            charts.monthly = new Chart(document.getElementById('monthlyChart'), {
+                type: 'bar',
+                data: {
+                    labels: months.map(m => {
+                        const [year, month] = m.split('-');
+                        return `${month}/${year}`;
+                    }),
+                    datasets: [{
+                        label: 'Interacciones Mensuales',
+                        data: values,
+                        backgroundColor: 'rgba(155, 89, 182, 0.7)',
+                        borderColor: '#9b59b6',
+                        borderWidth: 2,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#dcdcdc' },
+                            grid: { color: 'rgba(155, 89, 182, 0.2)' }
+                        },
+                        x: {
+                            ticks: { color: '#dcdcdc' },
+                            grid: { color: 'rgba(155, 89, 182, 0.2)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Input vs Output Length Chart
+        function renderLengthChart() {
+            charts.length = new Chart(document.getElementById('lengthChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Promedio Entrada', 'Promedio Salida'],
+                    datasets: [{
+                        label: 'Palabras',
+                        data: [statsData.avg_input_length, statsData.avg_output_length],
+                        backgroundColor: [
+                            'rgba(52, 152, 219, 0.7)',
+                            'rgba(243, 156, 18, 0.7)'
+                        ],
+                        borderColor: [
+                            '#3498db',
+                            '#f39c12'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#dcdcdc' },
+                            grid: { color: 'rgba(155, 89, 182, 0.2)' }
+                        },
+                        x: {
+                            ticks: { color: '#dcdcdc' },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Render Chats Table
+        function renderChatsTable() {
+            const tbody = document.getElementById('chatsTableBody');
+            
+            if (!statsData.chats_data || statsData.chats_data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay datos disponibles</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = statsData.chats_data.map(chat => {
+                const topTopics = Object.entries(chat.topics)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([topic, count]) => 
+                        `<span class="topic-tag">${topic} (${count})</span>`
+                    ).join('');
+                
+                return `
+                    <tr>
+                        <td>${chat.chat_id}</td>
+                        <td>${chat.total_interactions}</td>
+                        <td>${chat.total_input_words}</td>
+                        <td>${chat.total_output_words}</td>
+                        <td>${topTopics || 'Sin temas identificados'}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Load stats on page load
+        window.addEventListener('DOMContentLoaded', loadStats);
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-05-05T01:15:20.324759",
+  "total_chats": 1,
+  "total_interactions": 1,
+  "total_input_words": 11,
+  "total_output_words": 20,
+  "topic_distribution": {
+    "otro": 1
+  },
+  "interactions_by_day": {
+    "2026-05-04": 1
+  },
+  "interactions_by_month": {
+    "2026-05": 1
+  },
+  "interactions_by_year": {
+    "2026": 1
+  },
+  "chats_data": [
+    {
+      "chat_id": "34623043635@lid",
+      "total_interactions": 1,
+      "first_interaction": "2026-05-04T22:27:07.071373",
+      "last_interaction": "2026-05-04T22:27:07.071373",
+      "total_input_words": 11,
+      "total_output_words": 20,
+      "topics": {
+        "otro": 1
+      }
+    }
+  ],
+  "avg_input_length": 11.0,
+  "avg_output_length": 20.0
+}
