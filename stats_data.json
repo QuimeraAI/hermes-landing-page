@@ -1,22 +1,35 @@
 {
-  "generated_at": "2026-05-05T01:15:20.324759",
-  "total_chats": 1,
-  "total_interactions": 1,
-  "total_input_words": 11,
-  "total_output_words": 20,
+  "generated_at": "2026-05-05T09:58:15.769232",
+  "total_chats": 3,
+  "total_interactions": 3,
+  "total_input_words": 32,
+  "total_output_words": 1653,
   "topic_distribution": {
+    "tarot": 2,
     "otro": 1
   },
   "interactions_by_day": {
-    "2026-05-04": 1
+    "2026-05-04": 1,
+    "2026-05-05": 2
   },
   "interactions_by_month": {
-    "2026-05": 1
+    "2026-05": 3
   },
   "interactions_by_year": {
-    "2026": 1
+    "2026": 3
   },
   "chats_data": [
+    {
+      "chat_id": "161168765235437@lid",
+      "total_interactions": 1,
+      "first_interaction": "2026-05-05T09:42:26.828754",
+      "last_interaction": "2026-05-05T09:42:26.828754",
+      "total_input_words": 8,
+      "total_output_words": 852,
+      "topics": {
+        "tarot": 1
+      }
+    },
     {
       "chat_id": "34623043635@lid",
       "total_interactions": 1,
@@ -27,8 +40,19 @@
       "topics": {
         "otro": 1
       }
+    },
+    {
+      "chat_id": "44955590512891@lid",
+      "total_interactions": 1,
+      "first_interaction": "2026-05-05T09:45:53.867245",
+      "last_interaction": "2026-05-05T09:45:53.867245",
+      "total_input_words": 13,
+      "total_output_words": 781,
+      "topics": {
+        "tarot": 1
+      }
     }
   ],
-  "avg_input_length": 11.0,
-  "avg_output_length": 20.0
+  "avg_input_length": 10.67,
+  "avg_output_length": 551.0
 }
