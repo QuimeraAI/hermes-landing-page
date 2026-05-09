@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://quimeraai.github.io/hermes-landing-page/sitemap.xml
+Sitemap: https://hermesresponde.com/sitemap.xml
