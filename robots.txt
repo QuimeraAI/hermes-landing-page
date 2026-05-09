@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /stats.html
+Disallow: /stats_data.json
+Disallow: /generate_stats.py
+Disallow: /google64d286cbba6fc150.html
+Disallow: /BingSiteAuth.xml
 
 Sitemap: https://hermesresponde.com/sitemap.xml
