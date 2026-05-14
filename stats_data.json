@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-05-13T03:01:55.958662",
+  "generated_at": "2026-05-14T03:02:15.941972",
   "total_chats": 10,
-  "total_interactions": 159,
-  "total_input_words": 2187,
-  "total_output_words": 22765,
+  "total_interactions": 163,
+  "total_input_words": 2239,
+  "total_output_words": 23208,
   "topic_distribution": {
     "saludo": 10,
-    "tarot": 73,
-    "otro": 62,
+    "tarot": 75,
+    "otro": 64,
     "personalidad": 7,
     "amor": 1,
     "trabajo": 1,
@@ -23,26 +23,26 @@
     "2026-05-10": 3,
     "2026-05-11": 12,
     "2026-05-12": 34,
-    "2026-05-13": 1
+    "2026-05-13": 5
   },
   "interactions_by_month": {
-    "2026-05": 159
+    "2026-05": 163
   },
   "interactions_by_year": {
-    "2026": 159
+    "2026": 163
   },
   "chats_data": [
     {
       "chat_id": "236322086203556@lid",
-      "total_interactions": 19,
+      "total_interactions": 20,
       "first_interaction": "2026-05-05T12:14:54.669057",
-      "last_interaction": "2026-05-09T13:13:53.062954",
-      "total_input_words": 164,
-      "total_output_words": 4786,
+      "last_interaction": "2026-05-13T15:35:31.263475",
+      "total_input_words": 170,
+      "total_output_words": 5003,
       "topics": {
         "saludo": 1,
         "tarot": 6,
-        "otro": 12
+        "otro": 13
       }
     },
     {
@@ -102,15 +102,15 @@
     },
     {
       "chat_id": "161168765235437@lid",
-      "total_interactions": 86,
+      "total_interactions": 89,
       "first_interaction": "2026-05-05T09:42:26.828754",
-      "last_interaction": "2026-05-12T19:34:06.496535",
-      "total_input_words": 1410,
-      "total_output_words": 12625,
+      "last_interaction": "2026-05-13T21:14:26.438728",
+      "total_input_words": 1456,
+      "total_output_words": 12851,
       "topics": {
-        "tarot": 53,
+        "tarot": 55,
         "saludo": 4,
-        "otro": 24,
+        "otro": 25,
         "trabajo": 1,
         "numerología": 3,
         "personalidad": 1
@@ -165,6 +165,6 @@
       }
     }
   ],
-  "avg_input_length": 13.75,
-  "avg_output_length": 143.18
+  "avg_input_length": 13.74,
+  "avg_output_length": 142.38
 }
