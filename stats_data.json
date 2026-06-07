@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-06T03:01:49.729077",
+  "generated_at": "2026-06-07T03:01:06.033963",
   "total_chats": 14,
-  "total_interactions": 225,
-  "total_input_words": 3199,
-  "total_output_words": 29971,
+  "total_interactions": 230,
+  "total_input_words": 3316,
+  "total_output_words": 30970,
   "topic_distribution": {
     "saludo": 13,
-    "tarot": 99,
-    "otro": 86,
-    "personalidad": 7,
+    "tarot": 101,
+    "otro": 88,
+    "personalidad": 8,
     "amor": 10,
     "trabajo": 2,
     "numerología": 4,
@@ -30,27 +30,29 @@
     "2026-05-29": 2,
     "2026-05-31": 33,
     "2026-06-03": 16,
-    "2026-06-04": 3
+    "2026-06-04": 3,
+    "2026-06-06": 5
   },
   "interactions_by_month": {
     "2026-05": 206,
-    "2026-06": 19
+    "2026-06": 24
   },
   "interactions_by_year": {
-    "2026": 225
+    "2026": 230
   },
   "chats_data": [
     {
       "chat_id": "236322086203556@lid",
-      "total_interactions": 20,
+      "total_interactions": 23,
       "first_interaction": "2026-05-05T12:14:54.669057",
-      "last_interaction": "2026-05-13T15:35:31.263475",
-      "total_input_words": 170,
-      "total_output_words": 5003,
+      "last_interaction": "2026-06-06T20:53:59.611155",
+      "total_input_words": 233,
+      "total_output_words": 5490,
       "topics": {
         "saludo": 1,
-        "tarot": 6,
-        "otro": 13
+        "tarot": 7,
+        "otro": 14,
+        "personalidad": 1
       }
     },
     {
@@ -110,24 +112,24 @@
     },
     {
       "chat_id": "status@broadcast",
-      "total_interactions": 1,
+      "total_interactions": 2,
       "first_interaction": "2026-06-04T11:26:35.369905",
-      "last_interaction": "2026-06-04T11:26:35.369905",
+      "last_interaction": "2026-06-06T12:37:05.571666",
       "total_input_words": 0,
-      "total_output_words": 99,
+      "total_output_words": 177,
       "topics": {
-        "otro": 1
+        "otro": 2
       }
     },
     {
       "chat_id": "161168765235437@lid",
-      "total_interactions": 127,
+      "total_interactions": 128,
       "first_interaction": "2026-05-05T09:42:26.828754",
-      "last_interaction": "2026-06-04T15:00:42.436852",
-      "total_input_words": 2172,
-      "total_output_words": 17119,
+      "last_interaction": "2026-06-06T15:46:00.505806",
+      "total_input_words": 2226,
+      "total_output_words": 17553,
       "topics": {
-        "tarot": 76,
+        "tarot": 77,
         "saludo": 7,
         "otro": 36,
         "trabajo": 2,
@@ -223,6 +225,6 @@
       }
     }
   ],
-  "avg_input_length": 14.22,
-  "avg_output_length": 133.2
+  "avg_input_length": 14.42,
+  "avg_output_length": 134.65
 }
