@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-24T03:07:06.385454",
+  "generated_at": "2026-06-26T03:01:14.589969",
   "total_chats": 15,
-  "total_interactions": 252,
-  "total_input_words": 3701,
-  "total_output_words": 33463,
+  "total_interactions": 257,
+  "total_input_words": 3753,
+  "total_output_words": 33753,
   "topic_distribution": {
-    "otro": 93,
+    "otro": 98,
     "saludo": 15,
     "tarot": 115,
     "personalidad": 8,
@@ -39,14 +39,16 @@
     "2026-06-16": 3,
     "2026-06-20": 2,
     "2026-06-21": 1,
-    "2026-06-22": 1
+    "2026-06-22": 1,
+    "2026-06-24": 2,
+    "2026-06-25": 3
   },
   "interactions_by_month": {
     "2026-05": 206,
-    "2026-06": 46
+    "2026-06": 51
   },
   "interactions_by_year": {
-    "2026": 252
+    "2026": 257
   },
   "chats_data": [
     {
@@ -132,26 +134,26 @@
     },
     {
       "chat_id": "status@broadcast",
-      "total_interactions": 3,
+      "total_interactions": 4,
       "first_interaction": "2026-06-04T11:26:35.369905",
-      "last_interaction": "2026-06-12T12:36:01.417035",
+      "last_interaction": "2026-06-24T12:43:25.448895",
       "total_input_words": 0,
-      "total_output_words": 261,
+      "total_output_words": 345,
       "topics": {
-        "otro": 3
+        "otro": 4
       }
     },
     {
       "chat_id": "161168765235437@lid",
-      "total_interactions": 141,
+      "total_interactions": 145,
       "first_interaction": "2026-05-05T09:42:26.828754",
-      "last_interaction": "2026-06-22T16:20:57.396270",
-      "total_input_words": 2460,
-      "total_output_words": 18901,
+      "last_interaction": "2026-06-25T13:26:36.695269",
+      "total_input_words": 2512,
+      "total_output_words": 19107,
       "topics": {
         "tarot": 88,
         "saludo": 8,
-        "otro": 36,
+        "otro": 40,
         "trabajo": 2,
         "numerología": 4,
         "personalidad": 1,
@@ -246,6 +248,6 @@
       }
     }
   ],
-  "avg_input_length": 14.69,
-  "avg_output_length": 132.79
+  "avg_input_length": 14.6,
+  "avg_output_length": 131.33
 }
