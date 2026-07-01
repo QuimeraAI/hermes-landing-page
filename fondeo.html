@@ -32,6 +32,12 @@
         .card .value.green { color: var(--green); } .card .value.red { color: var(--red); } .card .value.gold { color: var(--gold); }
         .card .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
         
+        /* Section labels */
+        .section-label {
+            font-size: 14px; font-weight: 600; color: var(--muted);
+            text-transform: uppercase; letter-spacing: 1px;
+            margin: 24px 0 12px 0;
+        }
         /* Table */
         .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
         .table-header { 
@@ -68,7 +74,11 @@
         <p class="subtitle">Tradeify Select 25K · STRONG_TREND · MNQ 09-26 · 3 contratos</p>
     </div>
 
-    <div class="cards" id="cards"></div>
+    <div class="section-label">📊 Totales</div>
+    <div class="cards" id="cardsTotals"></div>
+
+    <div class="section-label">🟢 Cuenta Activa #5</div>
+    <div class="cards" id="cardsActive"></div>
 
     <div class="table-wrap">
         <div class="table-header">
@@ -154,37 +164,41 @@ const winRate = trades.length > 0 ? (wins.length / trades.length * 100) : 0;
 // ================================================================
 document.getElementById('refresh').textContent = '🟢 Bot activo';
 
-// Cards
-document.getElementById('cards').innerHTML = `
-    <div class="card">
-        <div class="label">Balance</div>
-        <div class="value gold">$${ACCOUNT.balance.toLocaleString()}</div>
-        <div class="sub">Cuenta #5 · ${ACCOUNT.number}</div>
-    </div>
-    <div class="card">
-        <div class="label">P&L Total</div>
-        <div class="value ${totalPnl >= 0 ? 'green' : 'red'}">${totalPnl >= 0 ? '+' : ''}$${totalPnl.toLocaleString()}</div>
-        <div class="sub">Profit Target: $${(ACCOUNT.target - ACCOUNT.balance).toLocaleString()} restante</div>
-    </div>
-    <div class="card">
-        <div class="label">Trades / Win Rate</div>
-        <div class="value">${wins.length}W / ${losses.length}L</div>
-        <div class="sub">${winRate.toFixed(0)}% win rate · ${trades.length} trades</div>
-    </div>
-    <div class="card">
-        <div class="label">Daily Cap / Max DD</div>
-        <div class="value">$600 / $1,000</div>
-        <div class="sub">ATM STRONG_600 · GapUp + 45minUp</div>
-    </div>
+// Cards — Totales
+document.getElementById('cardsTotals').innerHTML = `
     <div class="card">
         <div class="label">Cuentas Totales</div>
         <div class="value gold">${totalAccounts}</div>
         <div class="sub">🟢 ${activeAccounts} activa · 💀 ${blownAccounts} reventadas</div>
     </div>
     <div class="card">
-        <div class="label">Gasto en Cuentas</div>
+        <div class="label">Gasto Total</div>
         <div class="value red">$${totalSpent.toFixed(2)}</div>
         <div class="sub">${totalAccounts} × $${COST_PER_ACCOUNT} (Tradeify Select 25K)</div>
+    </div>
+    <div class="card">
+        <div class="label">Trades / Win Rate</div>
+        <div class="value">${wins.length}W / ${losses.length}L</div>
+        <div class="sub">${winRate.toFixed(0)}% win rate · ${trades.length} trades</div>
+    </div>
+`;
+
+// Cards — Cuenta Activa
+document.getElementById('cardsActive').innerHTML = `
+    <div class="card">
+        <div class="label">P&L Cuenta #5</div>
+        <div class="value ${totalPnl >= 0 ? 'green' : 'red'}">${totalPnl >= 0 ? '+' : ''}$${totalPnl.toLocaleString()}</div>
+        <div class="sub">Profit Target: $${(ACCOUNT.target - ACCOUNT.balance).toLocaleString()} restante</div>
+    </div>
+    <div class="card">
+        <div class="label">Balance</div>
+        <div class="value gold">$${ACCOUNT.balance.toLocaleString()}</div>
+        <div class="sub">Cuenta #5 · ${ACCOUNT.number}</div>
+    </div>
+    <div class="card">
+        <div class="label">Daily Cap / Max DD</div>
+        <div class="value">$600 / $1,000</div>
+        <div class="sub">ATM STRONG_600 · GapUp + 45minUp</div>
     </div>
 `;
 
