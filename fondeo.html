@@ -107,9 +107,9 @@
 const SESSIONS = [
     {date:"2026-06-09", open:29662.2, high:29710.0, low:29210.5, close:29436.8, pnl:null, result:"NO TRADE"},
     {date:"2026-06-10", open:28900.5, high:29050.0, low:28750.0, close:29139.8, pnl:null, result:"NO TRADE"},
-    {date:"2026-06-11", open:28833.8, high:29118.0, low:28705.0, close:28471.5, pnl:559, result:"WIN", filter:"GapUp✅ 45min✅", account:4},
-    {date:"2026-06-12", open:29450.0, high:29759.2, low:29231.2, close:29662.0, pnl:-1000, result:"LOSS (Max DD)", filter:"GapUp✅ 45min✅", account:4},
-    {date:"2026-06-15", open:30847.5, high:30918.5, low:30801.5, close:30831.2, pnl:600, result:"WIN ($600 cap)", filter:"GapUp✅ 45min✅", account:5},
+    {date:"2026-06-11", open:28833.8, high:29118.0, low:28705.0, close:28471.5, pnl:null, result:"Cuenta #4", account:4},
+    {date:"2026-06-12", open:29450.0, high:29759.2, low:29231.2, close:29662.0, pnl:null, result:"Cuenta #4 💀", account:4},
+    {date:"2026-06-15", open:30847.5, high:30918.5, low:30801.5, close:30831.2, pnl:594, result:"WIN", filter:"GapUp✅ 45min✅", account:5},
     {date:"2026-06-16", open:30530.2, high:30576.5, low:30273.8, close:30300.2, pnl:null, result:"NO TRADE", fortyfive:true},
     {date:"2026-06-17", open:30408.0, high:30520.0, low:29922.0, close:30140.8, pnl:null, result:"NO TRADE", fortyfive:false},
     {date:"2026-06-18", open:30573.2, high:30781.5, low:30400.0, close:30712.0, pnl:null, result:"NO TRADE", fortyfive:true},
@@ -129,8 +129,8 @@ const prevClose = (i) => i > 0 ? SESSIONS[i-1].close : null;
 const gapVal = (s, i) => prevClose(i) ? (s.open - prevClose(i)) : null;
 const gapUp = (s, i) => gapVal(s, i) !== null && gapVal(s, i) > 0;
 
-// Totals
-const trades = SESSIONS.filter(s => s.pnl !== null);
+// Totals — solo cuenta #5
+const trades = SESSIONS.filter(s => s.pnl !== null && s.account === 5);
 const wins = trades.filter(s => s.pnl > 0);
 const losses = trades.filter(s => s.pnl < 0);
 const totalPnl = trades.reduce((sum, s) => sum + s.pnl, 0);
@@ -181,12 +181,11 @@ SESSIONS.forEach((s, i) => {
     else if (s.fortyfive === false) ftTag = '<span class="tag tag-red">⬇ DOWN</span>';
     
     let resultHtml = '';
-    if (s.result === 'WIN' || (s.pnl > 0)) {
+    if (s.result === 'WIN') {
         resultHtml = `<span class="pnl-pos">+$${s.pnl}</span> <span class="tag tag-green">WIN</span>`;
-    } else if (s.result && s.result.includes('LOSS')) {
-        resultHtml = `<span class="pnl-neg">-$${Math.abs(s.pnl)}</span> <span class="tag tag-red">LOSS</span>`;
+    } else if (s.result && s.result.includes('Cuenta')) {
+        resultHtml = `<span class="tag tag-muted">${s.result}</span>`;
     } else if (s.result === 'NO TRADE') {
-        const reason = !gu ? 'Gap⬇' : (s.fortyfive === false ? '45m⬇' : 'Gap⬇');
         resultHtml = `<span class="tag tag-muted">NO TRADE</span>`;
     }
     
