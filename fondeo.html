@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Trading Bot — Fondeo Tradeify</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155;
+            --green: #22C55E; --red: #EF4444; --gold: #F59E0B;
+            --text: #E2E8F0; --muted: #94A3B8; --accent: #3B82F6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif; background: var(--bg);
+            color: var(--text); min-height: 100vh;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+        
+        /* Header */
+        .header { text-align: center; margin-bottom: 32px; }
+        .header h1 { font-size: 28px; font-weight: 700; color: var(--gold); letter-spacing: -0.5px; }
+        .header .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; }
+        
+        /* Cards row */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+        .card .label { font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 1px; margin-bottom: 8px; }
+        .card .value { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; }
+        .card .value.green { color: var(--green); } .card .value.red { color: var(--red); } .card .value.gold { color: var(--gold); }
+        .card .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+        
+        /* Table */
+        .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+        .table-header { 
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 20px; border-bottom: 1px solid var(--border);
+            font-weight: 600; font-size: 16px;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; padding: 10px 12px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; background: rgba(15,23,42,0.5); }
+        td { padding: 10px 12px; border-bottom: 1px solid rgba(51,65,85,0.5); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+        tr:hover td { background: rgba(59,130,246,0.05); }
+        tr.weekend td { background: rgba(51,65,85,0.3); color: var(--muted); }
+        
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; font-family: 'Inter', sans-serif; }
+        .tag-green { background: rgba(34,197,94,0.15); color: var(--green); }
+        .tag-red { background: rgba(239,68,68,0.15); color: var(--red); }
+        .tag-gold { background: rgba(245,158,11,0.15); color: var(--gold); }
+        .tag-muted { background: rgba(148,163,184,0.1); color: var(--muted); }
+        .tag-blue { background: rgba(59,130,246,0.15); color: var(--accent); }
+        
+        .pnl-pos { color: var(--green); } .pnl-neg { color: var(--red); }
+        
+        /* Footer */
+        .footer { text-align: center; padding: 32px 0; color: var(--muted); font-size: 12px; }
+        .footer a { color: var(--accent); text-decoration: none; }
+        
+        .refresh { font-size: 12px; color: var(--muted); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Hermes Trading Bot</h1>
+        <p class="subtitle">Tradeify Select 25K · STRONG_TREND · MNQ 09-26 · 3 contratos</p>
+    </div>
+
+    <div class="cards" id="cards"></div>
+
+    <div class="table-wrap">
+        <div class="table-header">
+            <span>📅 Sesiones</span>
+            <span class="refresh" id="refresh"></span>
+        </div>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Open RTH</th>
+                        <th>Close</th>
+                        <th>Cierre Ant.</th>
+                        <th>Gap</th>
+                        <th>Gap Up</th>
+                        <th>45min Up</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        Bot corriendo 24/7 en NinjaTrader 8 · Cuenta #5 TDFYSL25440378516<br>
+        <span id="updated"></span> · <a href="/">hermesresponde.com</a>
+    </div>
+</div>
+
+<script>
+// ================================================================
+// DATA — generated from bot logs + OHLC JSON
+// ================================================================
+const SESSIONS = [
+    {date:"2026-06-09", open:29662.2, high:29710.0, low:29210.5, close:29436.8, pnl:null, result:"NO TRADE"},
+    {date:"2026-06-10", open:28900.5, high:29050.0, low:28750.0, close:29139.8, pnl:null, result:"NO TRADE"},
+    {date:"2026-06-11", open:28833.8, high:29118.0, low:28705.0, close:28471.5, pnl:559, result:"WIN", filter:"GapUp✅ 45min✅", account:4},
+    {date:"2026-06-12", open:29450.0, high:29759.2, low:29231.2, close:29662.0, pnl:-1000, result:"LOSS (Max DD)", filter:"GapUp✅ 45min✅", account:4},
+    {date:"2026-06-15", open:30847.5, high:30918.5, low:30801.5, close:30831.2, pnl:600, result:"WIN ($600 cap)", filter:"GapUp✅ 45min✅", account:5},
+    {date:"2026-06-16", open:30530.2, high:30576.5, low:30273.8, close:30300.2, pnl:null, result:"NO TRADE", fortyfive:true},
+    {date:"2026-06-17", open:30408.0, high:30520.0, low:29922.0, close:30140.8, pnl:null, result:"NO TRADE", fortyfive:false},
+    {date:"2026-06-18", open:30573.2, high:30781.5, low:30400.0, close:30712.0, pnl:null, result:"NO TRADE", fortyfive:true},
+    {date:"2026-06-22", open:30820.5, high:30965.0, low:30504.0, close:30658.0, pnl:null, result:"NO TRADE", fortyfive:false},
+    {date:"2026-06-23", open:29705.5, high:30046.0, low:29578.0, close:29649.0, pnl:null, result:"NO TRADE", fortyfive:true},
+    {date:"2026-06-24", open:29712.0, high:29905.0, low:29267.0, close:29527.0, pnl:null, result:"NO TRADE", fortyfive:false},
+    {date:"2026-06-25", open:30148.8, high:30194.0, low:29298.0, close:29745.8, pnl:null, result:"NO TRADE", fortyfive:false},
+    {date:"2026-06-26", open:29361.2, high:29711.0, low:29184.2, close:29451.5, pnl:null, result:"NO TRADE"},
+    {date:"2026-06-29", open:29280.5, high:30069.0, low:29274.0, close:30052.8, pnl:null, result:"NO TRADE"},
+    {date:"2026-06-30", open:30050.2, high:30599.2, low:30035.5, close:30524.0, pnl:null, result:"NO TRADE", fortyfive:true},
+];
+
+const ACCOUNT = { number: "TDFYSL25440378516", balance: 25594.30, target: 26500, dd_limit: 24500 };
+
+// Computed
+const prevClose = (i) => i > 0 ? SESSIONS[i-1].close : null;
+const gapVal = (s, i) => prevClose(i) ? (s.open - prevClose(i)) : null;
+const gapUp = (s, i) => gapVal(s, i) !== null && gapVal(s, i) > 0;
+
+// Totals
+const trades = SESSIONS.filter(s => s.pnl !== null);
+const wins = trades.filter(s => s.pnl > 0);
+const losses = trades.filter(s => s.pnl < 0);
+const totalPnl = trades.reduce((sum, s) => sum + s.pnl, 0);
+const winRate = trades.length > 0 ? (wins.length / trades.length * 100) : 0;
+
+// ================================================================
+// RENDER
+// ================================================================
+document.getElementById('refresh').textContent = '🟢 Bot activo';
+
+// Cards
+document.getElementById('cards').innerHTML = `
+    <div class="card">
+        <div class="label">Balance</div>
+        <div class="value gold">$${ACCOUNT.balance.toLocaleString()}</div>
+        <div class="sub">Cuenta #5 · ${ACCOUNT.number}</div>
+    </div>
+    <div class="card">
+        <div class="label">P&L Total</div>
+        <div class="value ${totalPnl >= 0 ? 'green' : 'red'}">${totalPnl >= 0 ? '+' : ''}$${totalPnl.toLocaleString()}</div>
+        <div class="sub">Profit Target: $${(ACCOUNT.target - ACCOUNT.balance).toLocaleString()} restante</div>
+    </div>
+    <div class="card">
+        <div class="label">Trades / Win Rate</div>
+        <div class="value">${wins.length}W / ${losses.length}L</div>
+        <div class="sub">${winRate.toFixed(0)}% win rate · ${trades.length} trades</div>
+    </div>
+    <div class="card">
+        <div class="label">Daily Cap / Max DD</div>
+        <div class="value">$600 / $1,000</div>
+        <div class="sub">ATM STRONG_600 · GapUp + 45minUp</div>
+    </div>
+`;
+
+// Table
+let html = '';
+SESSIONS.forEach((s, i) => {
+    const gv = gapVal(s, i);
+    const gu = gapUp(s, i);
+    const gapStr = gv !== null ? `${gv >= 0 ? '+' : ''}${gv.toFixed(0)} pts` : '—';
+    
+    let gapTag = '—';
+    if (gu === true) gapTag = '<span class="tag tag-green">✅ UP</span>';
+    else if (gu === false) gapTag = '<span class="tag tag-red">⬇ DOWN</span>';
+    
+    let ftTag = '—';
+    if (s.fortyfive === true) ftTag = '<span class="tag tag-green">✅ UP</span>';
+    else if (s.fortyfive === false) ftTag = '<span class="tag tag-red">⬇ DOWN</span>';
+    
+    let resultHtml = '';
+    if (s.result === 'WIN' || (s.pnl > 0)) {
+        resultHtml = `<span class="pnl-pos">+$${s.pnl}</span> <span class="tag tag-green">WIN</span>`;
+    } else if (s.result && s.result.includes('LOSS')) {
+        resultHtml = `<span class="pnl-neg">-$${Math.abs(s.pnl)}</span> <span class="tag tag-red">LOSS</span>`;
+    } else if (s.result === 'NO TRADE') {
+        const reason = !gu ? 'Gap⬇' : (s.fortyfive === false ? '45m⬇' : 'Gap⬇');
+        resultHtml = `<span class="tag tag-muted">NO TRADE</span>`;
+    }
+    
+    const dateObj = new Date(s.date + 'T12:00:00');
+    const dayName = dateObj.toLocaleDateString('es-ES', {weekday: 'short'});
+    
+    const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6;
+    
+    html += `<tr class="${isWeekend ? 'weekend' : ''}">
+        <td>${dayName} ${s.date.slice(5)}</td>
+        <td>$${s.open.toFixed(0)}</td>
+        <td>$${s.close.toFixed(0)}</td>
+        <td>${prevClose(i) ? '$' + prevClose(i).toFixed(0) : '—'}</td>
+        <td>${gapStr}</td>
+        <td>${gapTag}</td>
+        <td>${ftTag}</td>
+        <td>${resultHtml}</td>
+    </tr>`;
+});
+
+document.getElementById('tbody').innerHTML = html;
+document.getElementById('updated').textContent = 'Última actualización: ' + new Date().toLocaleString('es-ES');
+</script>
+</body>
+</html>
