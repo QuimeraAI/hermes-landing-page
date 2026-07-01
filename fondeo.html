@@ -123,9 +123,22 @@ const SESSIONS = [
 ];
 
 const ACCOUNT = { number: "TDFYSL25440378516", balance: 25594.30, target: 26500, dd_limit: 24500 };
+const COST_PER_ACCOUNT = 70.85;
+const ACCOUNTS = [
+    {num:1, status:"REVENTADA"}, {num:2, status:"REVENTADA"}, {num:3, status:"REVENTADA"},
+    {num:4, status:"REVENTADA", id:"TDFYSL25654669513"},
+    {num:5, status:"ACTIVA", id:"TDFYSL25440378516"},
+];
+const totalAccounts = ACCOUNTS.length;
+const activeAccounts = ACCOUNTS.filter(a => a.status === "ACTIVA").length;
+const blownAccounts = ACCOUNTS.filter(a => a.status === "REVENTADA").length;
+const totalSpent = totalAccounts * COST_PER_ACCOUNT;
 
-// Computed
-const prevClose = (i) => i > 0 ? SESSIONS[i-1].close : null;
+// Sort sessions descending by date
+SESSIONS.sort((a, b) => b.date.localeCompare(a.date));
+
+// Computed (now with reversed array: prev = next day in real time, which is prev index in reversed order)
+const prevClose = (i) => i < SESSIONS.length-1 ? SESSIONS[i+1].close : null;
 const gapVal = (s, i) => prevClose(i) ? (s.open - prevClose(i)) : null;
 const gapUp = (s, i) => gapVal(s, i) !== null && gapVal(s, i) > 0;
 
@@ -162,6 +175,16 @@ document.getElementById('cards').innerHTML = `
         <div class="label">Daily Cap / Max DD</div>
         <div class="value">$600 / $1,000</div>
         <div class="sub">ATM STRONG_600 · GapUp + 45minUp</div>
+    </div>
+    <div class="card">
+        <div class="label">Cuentas Totales</div>
+        <div class="value gold">${totalAccounts}</div>
+        <div class="sub">🟢 ${activeAccounts} activa · 💀 ${blownAccounts} reventadas</div>
+    </div>
+    <div class="card">
+        <div class="label">Gasto en Cuentas</div>
+        <div class="value red">$${totalSpent.toFixed(2)}</div>
+        <div class="sub">${totalAccounts} × $${COST_PER_ACCOUNT} (Tradeify Select 25K)</div>
     </div>
 `;
 
