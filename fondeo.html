@@ -115,7 +115,7 @@
 // DATA — generated from bot logs + OHLC JSON
 // ================================================================
 const SESSIONS = [
-    {"date": "2026-07-06", "open": 29826.2, "high": 30094.0, "low": 29776.0, "close": 29949.2, "pnl": 0.0, "result": "NO TRADE", "account": 5, "fortyfive": true},
+    {"date": "2026-07-06", "open": 29826.2, "high": 30094.0, "low": 29776.0, "close": 29949.2, "pnl": -195.0, "result": "LOSS", "account": 5, "fortyfive": true},
     {"date": "2026-07-02", "open": 30075.8, "high": 30293.0, "low": 29328.5, "close": 29539.5, "pnl": null, "result": "NO TRADE", "account": 5},
     {"date": "2026-07-01", "open": 30236.8, "high": 30354.0, "low": 30054.8, "close": 30093.5, "pnl": null, "result": "NO TRADE", "account": 5},
     {date:"2026-06-09", open:29662.2, high:29710.0, low:29210.5, close:29436.8, pnl:null, result:"NO TRADE"},
@@ -135,7 +135,7 @@ const SESSIONS = [
     {date:"2026-06-30", open:30050.2, high:30599.2, low:30035.5, close:30524.0, pnl:null, result:"NO TRADE", fortyfive:true},
 ];
 
-const ACCOUNT = { number: "TDFYSL25440378516", balance: 25594.30, target: 26500, dd_limit: 24500 };
+const ACCOUNT = { number: "TDFYSL25440378516", balance: 25399.30, target: 26500, dd_limit: 24500 };
 const COST_PER_ACCOUNT = 70.85;
 const ACCOUNTS = [
     {num:1, status:"REVENTADA"}, {num:2, status:"REVENTADA"}, {num:3, status:"REVENTADA"},
@@ -227,6 +227,8 @@ SESSIONS.forEach((s, i) => {
         resultHtml = `<span class="tag tag-muted">${s.result}</span>`;
     } else if (s.result === 'NO TRADE') {
         resultHtml = `<span class="tag tag-muted">NO TRADE</span>`;
+    } else if (s.result === 'LOSS') {
+        resultHtml = `<span class="pnl-neg">-$${Math.abs(s.pnl)}</span> <span class="tag tag-red">LOSS</span>`;
     }
     
     const dateObj = new Date(s.date + 'T12:00:00');
