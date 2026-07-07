@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-06T03:01:22.684457",
+  "generated_at": "2026-07-07T03:01:54.454713",
   "total_chats": 15,
-  "total_interactions": 257,
-  "total_input_words": 3753,
-  "total_output_words": 33753,
+  "total_interactions": 259,
+  "total_input_words": 3764,
+  "total_output_words": 34150,
   "topic_distribution": {
-    "otro": 98,
+    "otro": 100,
     "saludo": 15,
     "tarot": 115,
     "personalidad": 8,
@@ -41,14 +41,16 @@
     "2026-06-21": 1,
     "2026-06-22": 1,
     "2026-06-24": 2,
-    "2026-06-25": 3
+    "2026-06-25": 3,
+    "2026-07-06": 2
   },
   "interactions_by_month": {
     "2026-05": 206,
-    "2026-06": 51
+    "2026-06": 51,
+    "2026-07": 2
   },
   "interactions_by_year": {
-    "2026": 257
+    "2026": 259
   },
   "chats_data": [
     {
@@ -134,26 +136,26 @@
     },
     {
       "chat_id": "status@broadcast",
-      "total_interactions": 4,
+      "total_interactions": 5,
       "first_interaction": "2026-06-04T11:26:35.369905",
-      "last_interaction": "2026-06-24T12:43:25.448895",
-      "total_input_words": 0,
-      "total_output_words": 345,
+      "last_interaction": "2026-07-06T13:20:01.564390",
+      "total_input_words": 2,
+      "total_output_words": 433,
       "topics": {
-        "otro": 4
+        "otro": 5
       }
     },
     {
       "chat_id": "161168765235437@lid",
-      "total_interactions": 145,
+      "total_interactions": 146,
       "first_interaction": "2026-05-05T09:42:26.828754",
-      "last_interaction": "2026-06-25T13:26:36.695269",
-      "total_input_words": 2512,
-      "total_output_words": 19107,
+      "last_interaction": "2026-07-06T12:30:54.368669",
+      "total_input_words": 2521,
+      "total_output_words": 19416,
       "topics": {
         "tarot": 88,
         "saludo": 8,
-        "otro": 40,
+        "otro": 41,
         "trabajo": 2,
         "numerología": 4,
         "personalidad": 1,
@@ -248,6 +250,6 @@
       }
     }
   ],
-  "avg_input_length": 14.6,
-  "avg_output_length": 131.33
+  "avg_input_length": 14.53,
+  "avg_output_length": 131.85
 }
