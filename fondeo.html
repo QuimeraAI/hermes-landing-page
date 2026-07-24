@@ -71,7 +71,7 @@
 <div class="container">
     <div class="header">
         <h1>Hermes Trading Bot</h1>
-        <p class="subtitle">Tradeify Select 25K · STRONG_TREND · MNQ 09-26 · 3 contratos</p>
+        <p class="subtitle">Tradeify Select 25K · STRONG_TREND v3 · MNQ 09-26 · 2 contratos · LONG+SHORT</p>
     </div>
 
     <div class="section-label">📊 Totales</div>
@@ -105,8 +105,8 @@
     </div>
 
     <div class="footer">
-        Bot corriendo 24/7 en NinjaTrader 8 · Cuenta #5 TDFYSL25440378516<br>
-        <span id="updated"></span> · <a href="/">hermesresponde.com</a> · Datos: Yahoo Finance + ATI NT8
+        Bot corriendo 24/7 en NinjaTrader 8 · Cuenta TDFYSL25142990433 · STRONG_TREND v3<br>
+        <span id="updated"></span> · <a href="/">hermesresponde.com</a> · LONG+SHORT · ATM STRONG_400_2CTR
     </div>
 </div>
 
@@ -115,7 +115,8 @@
 // DATA — generated from bot logs + OHLC JSON
 // ================================================================
 const SESSIONS = [
-    {"date": "2026-07-23", "open": 28719.0, "high": 28881.5, "low": 28434.0, "close": 28613.8, "pnl": null, "result": "NO TRADE", "account": 5},
+    {"date": "2026-07-24", "open": 28536.5, "high": 28573.0, "low": 28261.2, "close": 28326.2, "pnl": 400, "result": "WIN", "account": 5, "direction": "SHORT"},
+    {"date": "2026-07-23", "open": 28719.0, "high": 28881.5, "low": 28434.0, "close": 28613.8, "pnl": 460, "result": "WIN", "account": 5, "direction": "SHORT"},
     {"date": "2026-07-22", "open": 29093.8, "high": 29342.2, "low": 29093.8, "close": 29161.2, "pnl": null, "result": "NO TRADE", "account": 5},
     {"date": "2026-07-21", "open": 29224.0, "high": 29362.8, "low": 29064.5, "close": 29311.0, "pnl": null, "result": "NO TRADE", "account": 5},
     {"date": "2026-07-20", "open": 29044.0, "high": 29191.5, "low": 28768.2, "close": 28784.2, "pnl": null, "result": "NO TRADE", "account": 5},
@@ -147,12 +148,12 @@ const SESSIONS = [
     {date:"2026-06-30", open:30050.2, high:30599.2, low:30035.5, close:30524.0, pnl:null, result:"NO TRADE", fortyfive:true},
 ];
 
-const ACCOUNT = { number: "TDFYSL25440378516", balance: 25594.30, target: 26500, dd_limit: 24500 };
-const COST_PER_ACCOUNT = 70.85;
+const ACCOUNT = { number: "TDFYSL25142990433", balance: 25860.00, target: 26500, dd_limit: 24000 };
+const COST_PER_ACCOUNT = 65.00;
 const ACCOUNTS = [
     {num:1, status:"REVENTADA"}, {num:2, status:"REVENTADA"}, {num:3, status:"REVENTADA"},
     {num:4, status:"REVENTADA", id:"TDFYSL25654669513"},
-    {num:5, status:"ACTIVA", id:"TDFYSL25440378516"},
+    {num:5, status:"ACTIVA", id:"TDFYSL25142990433"},
 ];
 const totalAccounts = ACCOUNTS.length;
 const activeAccounts = ACCOUNTS.filter(a => a.status === "ACTIVA").length;
@@ -212,8 +213,8 @@ document.getElementById('cardsActive').innerHTML = `
     </div>
     <div class="card">
         <div class="label">Daily Cap / Max DD</div>
-        <div class="value">$600 / $1,000</div>
-        <div class="sub">ATM STRONG_600 · GapUp + 45minUp</div>
+        <div class="value">$400 / $1,000</div>
+        <div class="sub">ATM STRONG_400_2CTR · Gap ±20pts</div>
     </div>
 `;
 
@@ -234,7 +235,8 @@ SESSIONS.forEach((s, i) => {
     
     let resultHtml = '';
     if (s.result === 'WIN') {
-        resultHtml = `<span class="pnl-pos">+$${s.pnl}</span> <span class="tag tag-green">WIN</span>`;
+        const dir = s.direction || '';
+        resultHtml = `<span class="pnl-pos">+$${s.pnl}</span> <span class="tag tag-green">WIN ${dir}</span>`;
     } else if (s.result && s.result.includes('Cuenta')) {
         resultHtml = `<span class="tag tag-muted">${s.result}</span>`;
     } else if (s.result === 'NO TRADE') {
