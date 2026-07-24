@@ -169,12 +169,15 @@ const prevClose = (i) => i < SESSIONS.length-1 ? SESSIONS[i+1].close : null;
 const gapVal = (s, i) => prevClose(i) ? (s.open - prevClose(i)) : null;
 const gapUp = (s, i) => gapVal(s, i) !== null && gapVal(s, i) > 0;
 
-// Totals — solo cuenta #6 (post-reset 13 julio)
-const trades = SESSIONS.filter(s => s.pnl !== null && s.account === 6);
-const wins = trades.filter(s => s.pnl > 0);
-const losses = trades.filter(s => s.pnl < 0);
-const totalPnl = trades.reduce((sum, s) => sum + s.pnl, 0);
-const winRate = trades.length > 0 ? (wins.length / trades.length * 100) : 0;
+// Totales generales (todas las cuentas)
+const allTrades = SESSIONS.filter(s => s.pnl !== null);
+const allWins = allTrades.filter(s => s.pnl > 0);
+const allLosses = allTrades.filter(s => s.pnl < 0);
+
+// Totales P&L — solo cuenta #6 (post-reset 13 julio)
+const trades6 = SESSIONS.filter(s => s.pnl !== null && s.account === 6);
+const wins6 = trades6.filter(s => s.pnl > 0);
+const totalPnl = trades6.reduce((sum, s) => sum + s.pnl, 0);
 
 // ================================================================
 // RENDER
@@ -195,8 +198,8 @@ document.getElementById('cardsTotals').innerHTML = `
     </div>
     <div class="card">
         <div class="label">Trades / Win Rate</div>
-        <div class="value">${wins.length}W / ${losses.length}L</div>
-        <div class="sub">${winRate.toFixed(0)}% win rate · ${trades.length} trades</div>
+        <div class="value">${allWins.length}W / ${allLosses.length}L</div>
+        <div class="sub">Total histórico · ${allTrades.length} trades</div>
     </div>
 `;
 
