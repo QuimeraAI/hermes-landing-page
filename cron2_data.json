@@ -1,0 +1,12 @@
+[
+  {
+    "date": "2026-08-09",
+    "ok": true,
+    "prefill_tps": 162.2,
+    "decode_tps": 23.0,
+    "first_token_s": 22.68,
+    "total_s": 25.59,
+    "prompt_tokens": 3680,
+    "gen_tokens": 67
+  }
+]
