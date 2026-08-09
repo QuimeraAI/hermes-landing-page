@@ -1,12 +1,12 @@
 [
   {
     "date": "2026-08-09",
-    "ok": true,
-    "prefill_tps": 354.1,
-    "decode_tps": 22.9,
-    "first_token_s": 10.39,
-    "total_s": 12.66,
-    "prompt_tokens": 3680,
-    "gen_tokens": 52
+    "ok": false,
+    "prefill_tps": null,
+    "decode_tps": null,
+    "first_token_s": null,
+    "total_s": null,
+    "prompt_tokens": null,
+    "gen_tokens": null
   }
 ]
