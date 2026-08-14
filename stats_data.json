@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-13T03:01:45.884430",
+  "generated_at": "2026-08-14T03:00:35.855022",
   "total_chats": 16,
-  "total_interactions": 270,
-  "total_input_words": 4017,
-  "total_output_words": 35796,
+  "total_interactions": 272,
+  "total_input_words": 4020,
+  "total_output_words": 35980,
   "topic_distribution": {
     "otro": 102,
-    "saludo": 18,
+    "saludo": 19,
     "tarot": 119,
     "personalidad": 8,
-    "amor": 11,
+    "amor": 12,
     "trabajo": 3,
     "numerología": 4,
     "astrología": 5
@@ -50,16 +50,17 @@
     "2026-07-29": 1,
     "2026-08-02": 2,
     "2026-08-05": 1,
-    "2026-08-09": 2
+    "2026-08-09": 2,
+    "2026-08-13": 2
   },
   "interactions_by_month": {
     "2026-05": 206,
     "2026-06": 51,
     "2026-07": 8,
-    "2026-08": 5
+    "2026-08": 7
   },
   "interactions_by_year": {
-    "2026": 270
+    "2026": 272
   },
   "chats_data": [
     {
@@ -167,14 +168,14 @@
     },
     {
       "chat_id": "161168765235437@lid",
-      "total_interactions": 155,
+      "total_interactions": 156,
       "first_interaction": "2026-05-05T09:42:26.828754",
-      "last_interaction": "2026-08-09T13:35:08.171128",
-      "total_input_words": 2771,
-      "total_output_words": 20887,
+      "last_interaction": "2026-08-13T15:32:04.200790",
+      "total_input_words": 2773,
+      "total_output_words": 20990,
       "topics": {
         "tarot": 92,
-        "saludo": 11,
+        "saludo": 12,
         "otro": 42,
         "trabajo": 3,
         "numerología": 4,
@@ -185,13 +186,14 @@
     },
     {
       "chat_id": "0@c.us",
-      "total_interactions": 2,
+      "total_interactions": 3,
       "first_interaction": "2026-05-11T18:52:11.660380",
-      "last_interaction": "2026-08-05T08:04:14.081006",
-      "total_input_words": 2,
-      "total_output_words": 113,
+      "last_interaction": "2026-08-13T22:07:50.040376",
+      "total_input_words": 3,
+      "total_output_words": 194,
       "topics": {
-        "astrología": 2
+        "astrología": 2,
+        "amor": 1
       }
     },
     {
@@ -270,6 +272,6 @@
       }
     }
   ],
-  "avg_input_length": 14.88,
-  "avg_output_length": 132.58
+  "avg_input_length": 14.78,
+  "avg_output_length": 132.28
 }
