@@ -268,5 +268,15 @@
     "total_s": 56.49,
     "prompt_tokens": 3680,
     "gen_tokens": 51
+  },
+  {
+    "date": "2026-09-05",
+    "ok": true,
+    "prefill_tps": 68.3,
+    "decode_tps": 23.8,
+    "first_token_s": 53.86,
+    "total_s": 55.33,
+    "prompt_tokens": 3680,
+    "gen_tokens": 35
   }
 ]
