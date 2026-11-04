@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-11-03T03:01:34.373889",
-  "total_chats": 16,
-  "total_interactions": 291,
-  "total_input_words": 4146,
-  "total_output_words": 37923,
+  "generated_at": "2026-11-04T03:01:33.203600",
+  "total_chats": 17,
+  "total_interactions": 307,
+  "total_input_words": 4332,
+  "total_output_words": 41084,
   "topic_distribution": {
-    "otro": 112,
-    "saludo": 22,
-    "tarot": 123,
-    "personalidad": 8,
+    "otro": 123,
+    "saludo": 23,
+    "tarot": 125,
+    "personalidad": 9,
     "amor": 12,
     "trabajo": 3,
     "numerología": 5,
-    "astrología": 6
+    "astrología": 7
   },
   "interactions_by_day": {
     "2026-05-04": 1,
@@ -62,7 +62,9 @@
     "2026-09-20": 1,
     "2026-09-26": 1,
     "2026-10-01": 2,
-    "2026-10-28": 1
+    "2026-10-28": 1,
+    "2026-11-03": 3,
+    "2026-11-04": 13
   },
   "interactions_by_month": {
     "2026-05": 206,
@@ -70,10 +72,11 @@
     "2026-07": 8,
     "2026-08": 13,
     "2026-09": 10,
-    "2026-10": 3
+    "2026-10": 3,
+    "2026-11": 16
   },
   "interactions_by_year": {
-    "2026": 291
+    "2026": 307
   },
   "chats_data": [
     {
@@ -170,13 +173,13 @@
     },
     {
       "chat_id": "status@broadcast",
-      "total_interactions": 13,
+      "total_interactions": 15,
       "first_interaction": "2026-06-04T11:26:35.369905",
-      "last_interaction": "2026-09-20T09:57:10.351742",
-      "total_input_words": 22,
-      "total_output_words": 1087,
+      "last_interaction": "2026-11-03T16:20:33.327888",
+      "total_input_words": 32,
+      "total_output_words": 1379,
       "topics": {
-        "otro": 13
+        "otro": 15
       }
     },
     {
@@ -284,8 +287,23 @@
         "saludo": 1,
         "astrología": 1
       }
+    },
+    {
+      "chat_id": "179912740724736@lid",
+      "total_interactions": 14,
+      "first_interaction": "2026-11-03T14:03:11.019447",
+      "last_interaction": "2026-11-04T02:16:46.767979",
+      "total_input_words": 176,
+      "total_output_words": 2869,
+      "topics": {
+        "tarot": 2,
+        "otro": 9,
+        "astrología": 1,
+        "saludo": 1,
+        "personalidad": 1
+      }
     }
   ],
-  "avg_input_length": 14.25,
-  "avg_output_length": 130.32
+  "avg_input_length": 14.11,
+  "avg_output_length": 133.82
 }
