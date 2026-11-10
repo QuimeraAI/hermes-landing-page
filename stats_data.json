@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-11-09T03:01:11.818021",
+  "generated_at": "2026-11-10T03:01:43.890980",
   "total_chats": 17,
-  "total_interactions": 351,
-  "total_input_words": 4985,
-  "total_output_words": 49550,
+  "total_interactions": 362,
+  "total_input_words": 5069,
+  "total_output_words": 51564,
   "topic_distribution": {
-    "otro": 157,
+    "otro": 165,
     "saludo": 24,
-    "tarot": 128,
+    "tarot": 129,
     "personalidad": 10,
-    "amor": 14,
+    "amor": 16,
     "trabajo": 3,
     "numerología": 5,
     "astrología": 9,
@@ -67,7 +67,9 @@
     "2026-11-03": 3,
     "2026-11-04": 53,
     "2026-11-06": 1,
-    "2026-11-07": 3
+    "2026-11-07": 3,
+    "2026-11-09": 10,
+    "2026-11-10": 1
   },
   "interactions_by_month": {
     "2026-05": 206,
@@ -76,10 +78,10 @@
     "2026-08": 13,
     "2026-09": 10,
     "2026-10": 3,
-    "2026-11": 60
+    "2026-11": 71
   },
   "interactions_by_year": {
-    "2026": 351
+    "2026": 362
   },
   "chats_data": [
     {
@@ -293,22 +295,22 @@
     },
     {
       "chat_id": "179912740724736@lid",
-      "total_interactions": 58,
+      "total_interactions": 69,
       "first_interaction": "2026-11-03T14:03:11.019447",
-      "last_interaction": "2026-11-07T03:27:59.885236",
-      "total_input_words": 829,
-      "total_output_words": 11335,
+      "last_interaction": "2026-11-10T02:15:04.870628",
+      "total_input_words": 913,
+      "total_output_words": 13349,
       "topics": {
-        "tarot": 5,
-        "otro": 43,
+        "tarot": 6,
+        "otro": 51,
         "astrología": 3,
         "saludo": 2,
         "personalidad": 2,
-        "amor": 2,
+        "amor": 4,
         "salud": 1
       }
     }
   ],
-  "avg_input_length": 14.2,
-  "avg_output_length": 141.17
+  "avg_input_length": 14.0,
+  "avg_output_length": 142.44
 }
