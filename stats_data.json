@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-11-11T03:01:49.872152",
+  "generated_at": "2026-11-12T03:01:43.282874",
   "total_chats": 17,
-  "total_interactions": 387,
-  "total_input_words": 5547,
-  "total_output_words": 57184,
+  "total_interactions": 389,
+  "total_input_words": 5561,
+  "total_output_words": 57440,
   "topic_distribution": {
-    "otro": 188,
-    "saludo": 24,
+    "otro": 189,
+    "saludo": 25,
     "tarot": 131,
     "personalidad": 10,
     "amor": 16,
@@ -69,7 +69,9 @@
     "2026-11-06": 1,
     "2026-11-07": 3,
     "2026-11-09": 10,
-    "2026-11-10": 26
+    "2026-11-10": 26,
+    "2026-11-11": 1,
+    "2026-11-12": 1
   },
   "interactions_by_month": {
     "2026-05": 206,
@@ -78,10 +80,10 @@
     "2026-08": 13,
     "2026-09": 10,
     "2026-10": 3,
-    "2026-11": 96
+    "2026-11": 98
   },
   "interactions_by_year": {
-    "2026": 387
+    "2026": 389
   },
   "chats_data": [
     {
@@ -189,14 +191,14 @@
     },
     {
       "chat_id": "161168765235437@lid",
-      "total_interactions": 166,
+      "total_interactions": 167,
       "first_interaction": "2026-05-05T09:42:26.828754",
-      "last_interaction": "2026-11-10T20:45:22.643012",
-      "total_input_words": 2899,
-      "total_output_words": 22440,
+      "last_interaction": "2026-11-12T00:04:10.996187",
+      "total_input_words": 2912,
+      "total_output_words": 22628,
       "topics": {
         "tarot": 97,
-        "saludo": 15,
+        "saludo": 16,
         "otro": 43,
         "trabajo": 3,
         "numerología": 5,
@@ -207,15 +209,15 @@
     },
     {
       "chat_id": "0@c.us",
-      "total_interactions": 5,
+      "total_interactions": 6,
       "first_interaction": "2026-05-11T18:52:11.660380",
-      "last_interaction": "2026-09-26T00:02:19.591600",
-      "total_input_words": 5,
-      "total_output_words": 376,
+      "last_interaction": "2026-11-11T08:35:02.687938",
+      "total_input_words": 6,
+      "total_output_words": 444,
       "topics": {
         "astrología": 3,
         "amor": 1,
-        "otro": 1
+        "otro": 2
       }
     },
     {
@@ -311,6 +313,6 @@
       }
     }
   ],
-  "avg_input_length": 14.33,
-  "avg_output_length": 147.76
+  "avg_input_length": 14.3,
+  "avg_output_length": 147.66
 }
